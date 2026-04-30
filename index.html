@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akademi — Platform Pembelajaran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════ TOAST ═══════════════ -->
+  <div id="toast-root"></div>
+
+  <!-- ═══════════════ LOADER ═══════════════ -->
+  <div id="page-loader">
+    <div class="loader-inner">
+      <div class="loader-logo">akademi<span>.</span></div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       LOGIN PAGE
+  ═══════════════════════════════════════ -->
+  <div id="pg-login" class="page">
+    <div class="login-wrap">
+      <div class="login-panel">
+        <div class="login-panel-inner">
+          <div class="lp-brand">
+            <div class="lp-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <span>akademi.</span>
+          </div>
+          <h1 class="lp-headline">Belajar tanpa batas,<br /><em>berkembang tanpa henti.</em></h1>
+          <p class="lp-desc">Platform manajemen pembelajaran digital yang menyatukan guru, siswa, dan materi dalam satu ekosistem yang intuitif.</p>
+          <div class="lp-stats">
+            <div class="lp-stat"><span class="lp-stat-num">∞</span><span class="lp-stat-lbl">Materi</span></div>
+            <div class="lp-stat-div"></div>
+            <div class="lp-stat"><span class="lp-stat-num">3</span><span class="lp-stat-lbl">Role Pengguna</span></div>
+            <div class="lp-stat-div"></div>
+            <div class="lp-stat"><span class="lp-stat-num">24/7</span><span class="lp-stat-lbl">Akses</span></div>
+          </div>
+          <div class="lp-deco lp-deco-1"></div>
+          <div class="lp-deco lp-deco-2"></div>
+          <div class="lp-deco lp-deco-3"></div>
+        </div>
+      </div>
+      <div class="login-form-panel">
+        <div class="lf-wrap">
+          <div class="lf-header">
+            <h2>Masuk ke Akun</h2>
+            <p>Selamat datang kembali. Silakan masuk untuk melanjutkan.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inp-username"><i class="fa-regular fa-user"></i> Username</label>
+            <input id="inp-username" class="form-input" type="text" placeholder="Masukkan username Anda" autocomplete="username" onkeydown="if(event.key==='Enter')document.getElementById('inp-password').focus()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inp-password"><i class="fa-solid fa-lock"></i> Password</label>
+            <div class="input-password-wrap">
+              <input id="inp-password" class="form-input" type="password" placeholder="Masukkan password Anda" autocomplete="current-password" onkeydown="if(event.key==='Enter')App.login()" />
+              <button class="btn-eye" onclick="togglePassword()" tabindex="-1"><i class="fa-regular fa-eye" id="eye-icon"></i></button>
+            </div>
+          </div>
+          <div id="login-error" class="login-error hidden">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="login-error-msg">Username atau password salah.</span>
+          </div>
+          <button id="btn-login" class="btn-login" onclick="App.login()">
+            <span>Masuk</span><i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <div class="lf-switch">
+            <p>Belum punya akun? <a href="#" onclick="App.showRegister(); return false;">Daftar di sini</a></p>
+          </div>
+          <div class="lf-footer"><i class="fa-solid fa-shield-halved"></i> Data Anda diamankan dengan enkripsi SSL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       REGISTER PAGE
+  ═══════════════════════════════════════ -->
+  <div id="pg-register" class="page hidden">
+    <div class="login-wrap">
+      <div class="login-panel">
+        <div class="login-panel-inner">
+          <div class="lp-brand">
+            <div class="lp-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <span>akademi.</span>
+          </div>
+          <h1 class="lp-headline">Bergabunglah dengan kami,<br /><em>mulai perjalanan belajar Anda.</em></h1>
+          <p class="lp-desc">Platform manajemen pembelajaran digital yang menyatukan guru, siswa, dan materi dalam satu ekosistem yang intuitif.</p>
+          <div class="lp-stats">
+            <div class="lp-stat"><span class="lp-stat-num">∞</span><span class="lp-stat-lbl">Materi</span></div>
+            <div class="lp-stat-div"></div>
+            <div class="lp-stat"><span class="lp-stat-num">3</span><span class="lp-stat-lbl">Role Pengguna</span></div>
+            <div class="lp-stat-div"></div>
+            <div class="lp-stat"><span class="lp-stat-num">24/7</span><span class="lp-stat-lbl">Akses</span></div>
+          </div>
+          <div class="lp-deco lp-deco-1"></div>
+          <div class="lp-deco lp-deco-2"></div>
+          <div class="lp-deco lp-deco-3"></div>
+        </div>
+      </div>
+      <div class="login-form-panel">
+        <div class="lf-wrap">
+          <div class="lf-header">
+            <h2>Buat Akun Baru</h2>
+            <p>Daftarkan diri Anda sebagai guru atau siswa.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-role"><i class="fa-solid fa-user-tag"></i> Pilih Peran</label>
+            <select id="reg-role" class="form-input">
+              <option value="">-- Pilih Peran Anda --</option>
+              <option value="guru">Guru</option>
+              <option value="siswa">Siswa</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-nama"><i class="fa-regular fa-id-card"></i> Nama Lengkap</label>
+            <input id="reg-nama" class="form-input" type="text" placeholder="Masukkan nama lengkap Anda" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-username"><i class="fa-regular fa-user"></i> Username</label>
+            <input id="reg-username" class="form-input" type="text" placeholder="Pilih username yang unik" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-password"><i class="fa-solid fa-lock"></i> Password</label>
+            <div class="input-password-wrap">
+              <input id="reg-password" class="form-input" type="password" placeholder="Minimal 6 karakter" />
+              <button class="btn-eye" onclick="toggleRegisterPassword(1)" tabindex="-1"><i class="fa-regular fa-eye" id="eye-icon-pass1"></i></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-password2"><i class="fa-solid fa-lock-open"></i> Konfirmasi Password</label>
+            <div class="input-password-wrap">
+              <input id="reg-password2" class="form-input" type="password" placeholder="Ulangi password Anda" />
+              <button class="btn-eye" onclick="toggleRegisterPassword(2)" tabindex="-1"><i class="fa-regular fa-eye" id="eye-icon-pass2"></i></button>
+            </div>
+          </div>
+          <div id="register-error" class="login-error hidden">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="register-error-msg">Terjadi kesalahan.</span>
+          </div>
+          <button id="btn-register" class="btn-login" onclick="App.register()">
+            <span>Daftar</span><i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <div class="lf-switch">
+            <p>Sudah punya akun? <a href="#" onclick="App.showLogin(); return false;">Masuk di sini</a></p>
+          </div>
+          <div class="lf-footer"><i class="fa-solid fa-shield-halved"></i> Data Anda diamankan dengan enkripsi SSL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       APP PAGE
+  ═══════════════════════════════════════ -->
+  <div id="pg-app" class="page hidden">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+      <div class="sb-header">
+        <div class="sb-brand">
+          <div class="sb-brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <span class="sb-brand-name">akademi.</span>
+        </div>
+      </div>
+      <div class="sb-user" id="sb-user">
+        <div class="sb-avatar" id="sb-avatar">A</div>
+        <div class="sb-user-info">
+          <div class="sb-user-name" id="sb-user-name">—</div>
+          <div class="sb-user-role" id="sb-user-role">—</div>
+        </div>
+      </div>
+      <nav class="sb-nav" id="sb-nav"></nav>
+      <div class="sb-bottom">
+        <button class="sb-logout" onclick="App.logout()">
+          <i class="fa-solid fa-right-from-bracket"></i><span>Keluar</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="app-main" id="app-main">
+      <header class="topbar" id="topbar">
+        <div class="topbar-left">
+          <button class="btn-hamburger" id="btn-hamburger" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+          <div>
+            <div class="topbar-title" id="topbar-title">Dashboard</div>
+            <div class="topbar-breadcrumb" id="topbar-bc">Beranda</div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="topbar-date" id="topbar-date"></div>
+          <div class="topbar-notif"><i class="fa-regular fa-bell"></i></div>
+        </div>
+      </header>
+
+      <div class="content-area" id="content-area">
+
+        <!-- ══════════════════════════════════
+             DASHBOARD
+        ══════════════════════════════════ -->
+        <section id="sec-dashboard" class="sec">
+          <div class="sec-title-row">
+            <h2 class="sec-title" id="dash-greeting">Dashboard</h2>
+            <span class="sec-subtitle" id="dash-date-label"></span>
+          </div>
+          <div class="stat-grid" id="stat-grid"></div>
+          <div class="dash-grid">
+            <div class="card">
+              <div class="card-head">
+                <div class="card-head-icon bg-blue"><i class="fa-solid fa-book-open"></i></div>
+                <h3>Materi Terbaru</h3>
+              </div>
+              <div id="dash-materi-list"></div>
+            </div>
+            <div class="card">
+              <div class="card-head">
+                <div class="card-head-icon bg-amber"><i class="fa-solid fa-clipboard-list"></i></div>
+                <h3>Tugas Aktif</h3>
+              </div>
+              <div id="dash-tugas-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             MATERI GURU — upload file + link
+        ══════════════════════════════════ -->
+        <section id="sec-materi-guru" class="sec hidden">
+          <div class="sec-title-row">
+            <h2 class="sec-title">Kelola Materi</h2>
+          </div>
+          <div class="two-col-layout">
+            <div class="col-form">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-head-icon bg-blue"><i class="fa-solid fa-plus"></i></div>
+                  <h3>Tambah Materi Baru</h3>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Judul Materi <span class="req">*</span></label>
+                  <input id="m-judul" class="form-input" type="text" placeholder="Contoh: Persamaan Linear Satu Variabel" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mata Pelajaran</label>
+                  <input id="m-mapel" class="form-input" type="text" placeholder="Contoh: Matematika, IPA, Bahasa Indonesia..." />
+                </div>
+
+                <!-- Tab: Link vs File -->
+                <div class="upload-tabs">
+                  <button class="upload-tab active" id="tab-link" onclick="MateriUpload.switchTab('link')">
+                    <i class="fa-solid fa-link"></i> Link / URL
+                  </button>
+                  <button class="upload-tab" id="tab-file" onclick="MateriUpload.switchTab('file')">
+                    <i class="fa-solid fa-file-arrow-up"></i> Upload File
+                  </button>
+                </div>
+
+                <div id="materi-tab-link" class="tab-panel">
+                  <div class="form-group">
+                    <label class="form-label">Link Materi</label>
+                    <input id="m-link" class="form-input" type="url" placeholder="https://drive.google.com/... atau URL lainnya" />
+                  </div>
+                </div>
+
+                <div id="materi-tab-file" class="tab-panel hidden">
+                  <div class="form-group">
+                    <label class="form-label">Upload File</label>
+                    <div class="file-drop-zone" id="materi-drop-zone" onclick="document.getElementById('m-file').click()" ondragover="MateriUpload.dragOver(event)" ondragleave="MateriUpload.dragLeave(event)" ondrop="MateriUpload.drop(event)">
+                      <input type="file" id="m-file" class="hidden" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.jpg,.png,.mp4,.zip" onchange="MateriUpload.fileSelected(this)" />
+                      <div class="fz-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                      <div class="fz-text">Klik atau drag & drop file di sini</div>
+                      <div class="fz-hint">PDF, DOC, PPT, XLS, Gambar, Video — maks. 10MB</div>
+                      <div class="fz-selected hidden" id="materi-file-selected">
+                        <i class="fa-solid fa-file-circle-check"></i>
+                        <span id="materi-file-name">—</span>
+                      </div>
+                    </div>
+                    <div class="form-group mt-16">
+                      <label class="form-label">Atau tempel link Google Drive setelah upload</label>
+                      <input id="m-gdrive" class="form-input" type="url" placeholder="https://drive.google.com/file/d/..." />
+                      <small class="form-note"><i class="fa-solid fa-circle-info"></i> Pastikan file di Drive sudah dibagikan (Anyone with link)</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Deskripsi</label>
+                  <textarea id="m-deskripsi" class="form-textarea" placeholder="Jelaskan isi materi secara singkat..."></textarea>
+                </div>
+                <button class="btn-primary" onclick="Materi.upload()">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Upload Materi
+                </button>
+              </div>
+            </div>
+            <div class="col-list">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-head-icon bg-teal"><i class="fa-solid fa-list"></i></div>
+                  <h3>Daftar Materi <span class="count-badge" id="materi-count">0</span></h3>
+                </div>
+                <div id="materi-list-guru"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             MATERI SISWA
+        ══════════════════════════════════ -->
+        <section id="sec-materi-siswa" class="sec hidden">
+          <div class="sec-title-row">
+            <h2 class="sec-title">Materi Pembelajaran</h2>
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="materi-search" placeholder="Cari materi..." oninput="Materi.search(this.value)" />
+            </div>
+          </div>
+          <div id="materi-grid-siswa" class="materi-grid"></div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             TUGAS GURU — file + link
+        ══════════════════════════════════ -->
+        <section id="sec-tugas-guru" class="sec hidden">
+          <div class="sec-title-row">
+            <h2 class="sec-title">Kelola Tugas</h2>
+          </div>
+          <div class="two-col-layout">
+            <div class="col-form">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-head-icon bg-amber"><i class="fa-solid fa-plus"></i></div>
+                  <h3>Buat Tugas Baru</h3>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Judul Tugas <span class="req">*</span></label>
+                  <input id="t-judul" class="form-input" type="text" placeholder="Contoh: Latihan Soal Bab 5" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mata Pelajaran</label>
+                  <input id="t-mapel" class="form-input" type="text" placeholder="Contoh: Matematika" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Deadline</label>
+                  <input id="t-deadline" class="form-input" type="date" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Instruksi Tugas</label>
+                  <textarea id="t-deskripsi" class="form-textarea" placeholder="Jelaskan instruksi pengerjaan tugas..."></textarea>
+                </div>
+
+                <!-- Lampiran tugas: link atau file -->
+                <div class="form-group">
+                  <label class="form-label">Lampiran Soal <span class="form-hint">(opsional)</span></label>
+                  <div class="upload-tabs">
+                    <button class="upload-tab active" id="ttab-link" onclick="TugasUpload.switchTab('link')">
+                      <i class="fa-solid fa-link"></i> Link
+                    </button>
+                    <button class="upload-tab" id="ttab-file" onclick="TugasUpload.switchTab('file')">
+                      <i class="fa-solid fa-file-arrow-up"></i> File
+                    </button>
+                  </div>
+                  <div id="tugas-tab-link">
+                    <input id="t-link" class="form-input" type="url" placeholder="https://drive.google.com/..." />
+                  </div>
+                  <div id="tugas-tab-file" class="hidden">
+                    <div class="file-drop-zone" id="tugas-drop-zone" onclick="document.getElementById('t-file').click()" ondragover="TugasUpload.dragOver(event)" ondragleave="TugasUpload.dragLeave(event)" ondrop="TugasUpload.drop(event)">
+                      <input type="file" id="t-file" class="hidden" accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.png" onchange="TugasUpload.fileSelected(this)" />
+                      <div class="fz-icon"><i class="fa-solid fa-file-arrow-up"></i></div>
+                      <div class="fz-text">Klik atau drag & drop file soal</div>
+                      <div class="fz-hint">PDF, DOC, PPT, Gambar</div>
+                      <div class="fz-selected hidden" id="tugas-file-selected">
+                        <i class="fa-solid fa-file-circle-check"></i>
+                        <span id="tugas-file-name">—</span>
+                      </div>
+                    </div>
+                    <div class="form-group mt-16">
+                      <input id="t-gdrive" class="form-input" type="url" placeholder="Link Google Drive file soal..." />
+                      <small class="form-note"><i class="fa-solid fa-circle-info"></i> Pastikan file sudah dibagikan (Anyone with link)</small>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="btn-primary" onclick="Tugas.buat()">
+                  <i class="fa-solid fa-paper-plane"></i> Buat Tugas
+                </button>
+              </div>
+
+              <div class="card mt-16">
+                <div class="card-head">
+                  <div class="card-head-icon bg-amber"><i class="fa-solid fa-list-check"></i></div>
+                  <h3>Daftar Tugas</h3>
+                </div>
+                <div id="tugas-list-guru"></div>
+              </div>
+            </div>
+            <div class="col-list">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-head-icon bg-green"><i class="fa-solid fa-inbox"></i></div>
+                  <h3>Jawaban Masuk <span class="count-badge" id="jawaban-count">0</span></h3>
+                </div>
+                <div id="jawaban-list-guru"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             TUGAS SISWA
+        ══════════════════════════════════ -->
+        <section id="sec-tugas-siswa" class="sec hidden">
+          <div class="sec-title-row">
+            <h2 class="sec-title">Tugas Saya</h2>
+          </div>
+          <div id="tugas-list-siswa"></div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             NILAI GURU
+        ══════════════════════════════════ -->
+        <section id="sec-nilai-guru" class="sec hidden">
+          <div class="sec-title-row"><h2 class="sec-title">Rekap Nilai</h2></div>
+          <div class="card">
+            <div class="card-head">
+              <div class="card-head-icon bg-purple"><i class="fa-solid fa-star"></i></div>
+              <h3>Semua Nilai Siswa</h3>
+            </div>
+            <div id="nilai-list-guru"></div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             NILAI SISWA
+        ══════════════════════════════════ -->
+        <section id="sec-nilai-siswa" class="sec hidden">
+          <div class="sec-title-row"><h2 class="sec-title">Nilai Saya</h2></div>
+          <div id="nilai-summary-siswa"></div>
+          <div class="card mt-16">
+            <div class="card-head">
+              <div class="card-head-icon bg-purple"><i class="fa-solid fa-table"></i></div>
+              <h3>Rincian Nilai</h3>
+            </div>
+            <div id="nilai-list-siswa"></div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             KUIS GURU — Buat & kelola kuis
+        ══════════════════════════════════ -->
+        <section id="sec-kuis-guru" class="sec hidden">
+          <div id="kuis-guru-root"></div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             KUIS SISWA — Pilih kuis → kerjakan
+        ══════════════════════════════════ -->
+        <section id="sec-kuis-siswa" class="sec hidden">
+          <div id="kuis-siswa-root"></div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             ABSENSI GURU
+        ══════════════════════════════════ -->
+        <section id="sec-absensi-guru" class="sec hidden">
+          <div class="sec-title-row">
+            <h2 class="sec-title">Kelola Absensi</h2>
+          </div>
+          <div class="two-col-layout">
+            <div class="col-form">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-head-icon bg-blue"><i class="fa-solid fa-plus"></i></div>
+                  <h3>Buat Absensi Baru</h3>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Judul Absensi <span class="req">*</span></label>
+                  <input id="abs-judul" class="form-input" type="text" placeholder="Contoh: Absensi Pembelajaran Hari Ini" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mata Pelajaran</label>
+                  <input id="abs-mapel" class="form-input" type="text" placeholder="Contoh: Matematika" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tanggal</label>
+                  <input id="abs-tgl" class="form-input" type="date" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Jam</label>
+                  <input id="abs-jam" class="form-input" type="time" />
+                </div>
+                <button class="btn-primary" onclick="AbsensiGuru.tambah()">
+                  <i class="fa-solid fa-plus"></i> Buat Absensi
+                </button>
+              </div>
+            </div>
+            <div class="col-list">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-head-icon bg-green"><i class="fa-solid fa-list"></i></div>
+                  <h3>Daftar Absensi</h3>
+                </div>
+                <div id="abs-list-guru"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             ABSENSI SISWA
+        ══════════════════════════════════ -->
+        <section id="sec-absensi-siswa" class="sec hidden">
+          <div class="sec-title-row">
+            <h2 class="sec-title">Absensi Saya</h2>
+          </div>
+          <div id="abs-siswa-list"></div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             ZOOM GURU
+        ══════════════════════════════════ -->
+        <section id="sec-zoom-guru" class="sec hidden">
+          <div class="sec-title-row">
+            <h2 class="sec-title">Kelola Zoom</h2>
+          </div>
+          <div class="two-col-layout">
+            <div class="col-form">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-head-icon bg-purple"><i class="fa-solid fa-plus"></i></div>
+                  <h3>Tambah Zoom Meeting</h3>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Judul Meeting <span class="req">*</span></label>
+                  <input id="zoom-judul" class="form-input" type="text" placeholder="Contoh: Pembelajaran Siang Ini" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mata Pelajaran</label>
+                  <input id="zoom-mapel" class="form-input" type="text" placeholder="Contoh: Matematika" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Link Zoom <span class="req">*</span></label>
+                  <input id="zoom-link" class="form-input" type="url" placeholder="https://zoom.us/j/..." />
+                </div>
+                <button class="btn-primary" onclick="ZoomGuru.tambah()">
+                  <i class="fa-solid fa-plus"></i> Tambah Zoom
+                </button>
+              </div>
+            </div>
+            <div class="col-list">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-head-icon bg-purple"><i class="fa-solid fa-video"></i></div>
+                  <h3>Daftar Zoom</h3>
+                </div>
+                <div id="zoom-list-guru"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             ZOOM SISWA
+        ══════════════════════════════════ -->
+        <section id="sec-zoom-siswa" class="sec hidden">
+          <div class="sec-title-row">
+            <h2 class="sec-title">Zoom Meeting</h2>
+          </div>
+          <div id="zoom-siswa-list"></div>
+        </section>
+
+        <!-- ══════════════════════════════════
+             FORUM
+        ══════════════════════════════════ -->
+        <section id="sec-forum" class="sec hidden">
+          <div class="sec-title-row"><h2 class="sec-title">Forum Diskusi</h2></div>
+          <div class="forum-layout">
+            <div class="card forum-card">
+              <div class="forum-messages" id="forum-messages"></div>
+              <div class="forum-composer">
+                <div class="forum-composer-avatar" id="forum-avatar">A</div>
+                <div class="forum-input-wrap">
+                  <input id="forum-input" class="form-input" type="text" placeholder="Tulis pesan atau pertanyaan..." onkeydown="if(event.key==='Enter')Forum.kirim()" />
+                  <button class="btn-send" onclick="Forum.kirim()"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- /content-area -->
+    </div><!-- /app-main -->
+  </div><!-- /pg-app -->
+
+
+  <!-- ═══════════════════════════════════════
+       MODALS
+  ═══════════════════════════════════════ -->
+
+  <!-- Modal: Input Nilai -->
+  <div class="modal-overlay hidden" id="modal-nilai">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-star"></i> Input Nilai</h3>
+        <button class="modal-close" onclick="Modal.close('modal-nilai')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="n-idx" />
+        <div class="form-group">
+          <label class="form-label">Nama Siswa</label>
+          <input id="n-nama" class="form-input" readonly />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tugas</label>
+          <input id="n-tugas" class="form-input" readonly />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nilai <span class="form-hint">(0 – 100)</span></label>
+          <input id="n-nilai" class="form-input" type="number" min="0" max="100" placeholder="85" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="Modal.close('modal-nilai')">Batal</button>
+        <button class="btn-primary" onclick="Nilai.simpan()"><i class="fa-solid fa-check"></i> Simpan Nilai</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Kumpul Jawaban Siswa (link + file) -->
+  <div class="modal-overlay hidden" id="modal-jawaban">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-cloud-arrow-up"></i> Kumpulkan Jawaban</h3>
+        <button class="modal-close" onclick="Modal.close('modal-jawaban')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="j-idx" />
+        <div class="form-group">
+          <label class="form-label">Tugas</label>
+          <input id="j-tugas" class="form-input" readonly />
+        </div>
+
+        <!-- Tab: Link atau File -->
+        <div class="upload-tabs">
+          <button class="upload-tab active" id="jtab-link" onclick="JawabanUpload.switchTab('link')">
+            <i class="fa-solid fa-link"></i> Link
+          </button>
+          <button class="upload-tab" id="jtab-file" onclick="JawabanUpload.switchTab('file')">
+            <i class="fa-solid fa-file-arrow-up"></i> Upload File
+          </button>
+        </div>
+
+        <div id="jawaban-tab-link">
+          <div class="form-group">
+            <label class="form-label">Link Jawaban <span class="req">*</span></label>
+            <input id="j-link" class="form-input" type="url" placeholder="https://drive.google.com/..." />
+          </div>
+        </div>
+
+        <div id="jawaban-tab-file" class="hidden">
+          <div class="form-group">
+            <label class="form-label">Upload File Jawaban</label>
+            <div class="file-drop-zone" id="jwb-drop-zone" onclick="document.getElementById('j-file').click()" ondragover="JawabanUpload.dragOver(event)" ondragleave="JawabanUpload.dragLeave(event)" ondrop="JawabanUpload.drop(event)">
+              <input type="file" id="j-file" class="hidden" accept=".pdf,.doc,.docx,.jpg,.png,.zip" onchange="JawabanUpload.fileSelected(this)" />
+              <div class="fz-icon"><i class="fa-solid fa-file-arrow-up"></i></div>
+              <div class="fz-text">Klik atau drag file jawaban</div>
+              <div class="fz-hint">PDF, DOC, Gambar, ZIP</div>
+              <div class="fz-selected hidden" id="jwb-file-selected">
+                <i class="fa-solid fa-file-circle-check"></i>
+                <span id="jwb-file-name">—</span>
+              </div>
+            </div>
+            <div class="form-group mt-16">
+              <label class="form-label">Link Google Drive (setelah upload manual)</label>
+              <input id="j-gdrive" class="form-input" type="url" placeholder="https://drive.google.com/file/d/..." />
+              <small class="form-note"><i class="fa-solid fa-circle-info"></i> Upload file ke Drive lalu tempel linknya di sini</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Catatan <span class="form-hint">(opsional)</span></label>
+          <textarea id="j-catatan" class="form-textarea" placeholder="Catatan untuk guru..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="Modal.close('modal-jawaban')">Batal</button>
+        <button class="btn-primary" onclick="Tugas.kumpul()"><i class="fa-solid fa-cloud-arrow-up"></i> Kumpulkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Preview Kuis (guru lihat detail kuis) -->
+  <div class="modal-overlay hidden" id="modal-preview-kuis">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-eye"></i> Preview Kuis</h3>
+        <button class="modal-close" onclick="Modal.close('modal-preview-kuis')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="preview-kuis-body"></div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="Modal.close('modal-preview-kuis')">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Viewer Materi -->
+  <div class="modal-overlay hidden" id="modal-viewer-materi">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3 id="viewer-materi-judul">Judul Materi</h3>
+          <p id="viewer-materi-mapel" style="font-size:12px;color:var(--text-secondary);margin-top:4px"></p>
+        </div>
+        <button class="modal-close" onclick="Modal.close('modal-viewer-materi')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="viewer-materi-body">
+        <div style="text-align:center;padding:40px">
+          <i class="fa-solid fa-file-pdf" style="font-size:48px;color:var(--text-tertiary);margin-bottom:16px;display:block"></i>
+          <p style="color:var(--text-secondary)">Loading...</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="Modal.close('modal-viewer-materi')">Tutup</button>
+        <a id="viewer-materi-link" href="#" target="_blank" class="btn-primary">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka di Tab Baru
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar overlay -->
+  <div class="sidebar-overlay hidden" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
