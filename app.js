@@ -8,7 +8,7 @@
 
 // ─── CONFIG ──────────────────────────────────────────────────
 const CONFIG = {
-  API_URL: 'https://script.google.com/macros/s/AKfycby9-xvyUcN1fjKnS1S407WBjfAvd0xf2VmXtbtYLjLVSc0XGHW1R5iD4BHmnafQA42tWg/exec',
+  API_URL: 'https://script.google.com/macros/s/AKfycbyC73TB6Tl4zm0XWbKOZR3mX1eTUDUyDv6vK9o-ayZ67pTQR71k9haOcFqYU931MbA/exec',
 };
 
 // ─── STATE ───────────────────────────────────────────────────
