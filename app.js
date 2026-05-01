@@ -799,11 +799,34 @@ const MateriViewer = {
       const isGoogleDoc = materi.link.includes('docs.google.com') && !materi.link.includes('spreadsheet');
       
       if(isGoogleDrive || isGoogleSheet || isGoogleDoc) {
-        const previewLink = materi.link.replace('/view', '').replace('?usp=sharing', '');
-        body.innerHTML = `
-          <iframe src="${previewLink}/preview" 
-            style="width:100%;height:500px;border:1px solid var(--border);border-radius:var(--radius)" 
-            allow="fullscreen"></iframe>`;
+        let previewLink = '';
+        
+        // Extract ID dari URL
+        const idMatch = materi.link.match(/\/d\/([a-zA-Z0-9-_]+)/);
+        if(idMatch && idMatch[1]) {
+          const id = idMatch[1];
+          
+          if(isGoogleDoc) {
+            previewLink = `https://docs.google.com/document/d/${id}/preview`;
+          } else if(isGoogleSheet) {
+            previewLink = `https://docs.google.com/spreadsheets/d/${id}/preview`;
+          } else if(isGoogleDrive) {
+            previewLink = `https://drive.google.com/file/d/${id}/preview`;
+          }
+        }
+        
+        if(previewLink) {
+          body.innerHTML = `
+            <iframe src="${previewLink}" 
+              style="width:100%;height:500px;border:1px solid var(--border);border-radius:var(--radius)" 
+              allow="fullscreen"></iframe>`;
+        } else {
+          body.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-secondary)">
+            <i class="fa-solid fa-link-slash" style="font-size:48px;margin-bottom:16px;display:block;color:var(--red)"></i>
+            <p><strong>Link tidak valid</strong></p>
+            <p style="font-size:13px;margin-top:8px">Format URL Google tidak dikenali.</p>
+          </div>`;
+        }
       } else {
         body.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-secondary)">
           <i class="fa-solid fa-external-link-alt" style="font-size:48px;margin-bottom:16px;display:block;color:var(--blue)"></i>
