@@ -767,7 +767,15 @@ const MateriViewer = {
     this._open(judul);
   },
   openByElement(el) {
-    const judul = el.closest('tr').dataset.materi;
+    // Cek apakah ada di dalam tr (table row) atau div.materi-card
+    const trEl = el.closest('tr');
+    const cardEl = el.closest('.materi-card');
+    const judul = trEl ? trEl.dataset.materi : (cardEl ? cardEl.dataset.materi : null);
+    
+    if(!judul) {
+      Toast.error('Error', 'Tidak bisa membuka materi.');
+      return;
+    }
     this._open(judul);
   },
   async _open(judul) {
