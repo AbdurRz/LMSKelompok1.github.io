@@ -964,6 +964,7 @@ td .actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .btn-abs-action:hover, .btn-zoom-action:hover {
   background: var(--bg-2); border-color: var(--border-dark); color: var(--text-primary);
 }
+.btn-abs-action.view { color: var(--amber); }
 .btn-abs-action.edit { color: var(--blue); }
 .btn-abs-action.delete { color: var(--red); }
 .btn-zoom-action.edit { color: var(--blue); }

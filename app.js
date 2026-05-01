@@ -580,6 +580,7 @@ const Render = {
           </div>
         </div>
         <div class="abs-actions">
+          <button class="btn-abs-action view" onclick="AbsensiGuru.view('${a.id}')" title="Lihat Detail"><i class="fa-solid fa-eye"></i></button>
           <button class="btn-abs-action edit" onclick="AbsensiGuru.edit('${a.id}')" title="Edit"><i class="fa-solid fa-pen"></i></button>
           <button class="btn-abs-action delete" onclick="AbsensiGuru.delete('${a.id}')" title="Hapus"><i class="fa-solid fa-trash"></i></button>
         </div>
@@ -1711,6 +1712,63 @@ const AbsensiGuru = {
     } else {
       Toast.error('Gagal',res.message||'Gagal membuat absensi.');
     }
+  },
+
+  view(id) {
+    const abs = State.absensi.find(a=>a.id===id);
+    if(!abs) return;
+    
+    // Ambil semua siswa yang absen pada absensi ini
+    const siswaAbsen = State.absensiSiswa.filter(as=>as.absensiId===id);
+    
+    // Generate tabel siswa
+    let tblHtml = `
+      <div style="margin-top:20px">
+        <h4 style="margin-bottom:16px">Data Siswa</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>#</th><th>Nama Siswa</th><th>Status</th><th>Waktu Absen</th></tr></thead>
+          <tbody>`;
+    
+    // Tampilkan siswa yang sudah absen
+    let no = 1;
+    siswaAbsen.forEach(sa=>{
+      tblHtml += `<tr>
+        <td>${no}</td>
+        <td>${sa.nama}</td>
+        <td><span class="badge badge-green">✓ Hadir</span></td>
+        <td style="font-size:13px;color:var(--text-tertiary)">${H.fmtDate(sa.waktu)}</td>
+      </tr>`;
+      no++;
+    });
+    
+    tblHtml += `</tbody></table></div>
+      </div>`;
+    
+    // Tampilkan info di modal atau alert
+    const content = `
+      <div>
+        <h3>${abs.judul}</h3>
+        <p style="color:var(--text-secondary);margin:8px 0;font-size:14px">
+          <strong>${abs.mapel||'—'}</strong> • ${abs.tgl} ${abs.jam}
+        </p>
+        <p style="margin:16px 0"><strong>Total Hadir:</strong> ${siswaAbsen.length} siswa</p>
+        ${tblHtml}
+      </div>`;
+    
+    // Gunakan confirm dialog atau buat modal khusus
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);
+      display:flex;align-items:center;justify-content:center;z-index:9999;
+    `;
+    modal.innerHTML = `
+      <div style="background:white;border-radius:8px;padding:32px;max-width:700px;max-height:80vh;overflow-y:auto;box-shadow:0 10px 40px rgba(0,0,0,0.2);">
+        ${content}
+        <button onclick="this.closest('div').parentElement.remove()" class="btn-primary" style="margin-top:20px">
+          Tutup
+        </button>
+      </div>`;
+    document.body.appendChild(modal);
   },
 
   async edit(id) {
